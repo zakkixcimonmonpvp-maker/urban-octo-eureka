@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coding Academy kazedream</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: white;
+}
+
+header {
+  padding: 22px 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111a30;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: bold;
+  color: #60a5fa;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 18px;
+}
+
+.hero {
+  text-align: center;
+  padding: 75px 20px 45px;
+}
+
+.hero h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.hero h1 span {
+  color: #60a5fa;
+}
+
+.hero p {
+  color: #aab5ca;
+  margin-bottom: 25px;
+}
+
+.search-box {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  background: #18243b;
+  border: 1px solid #334765;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 16px;
+  background: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  min-width: 0;
+}
+
+.search-box button {
+  padding: 0 20px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.container {
+  padding: 30px 8%;
+}
+
+.container h2 {
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.filters button {
+  padding: 10px 18px;
+  background: #1b2942;
+  border: 1px solid #334765;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filters button.active,
+.filters button:hover {
+  background: #2563eb;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #141f35;
+  border: 1px solid #283956;
+  padding: 22px;
+  border-radius: 14px;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #60a5fa;
+}
+
+.card .tag {
+  color: #60a5fa;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #aab5ca;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.card button {
+  margin-top: 18px;
+  padding: 10px 15px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+#result {
+  color: #aab5ca;
+  margin-bottom: 18px;
+}
+
+.lesson {
+  display: none;
+  margin-top: 35px;
+  padding: 25px;
+  background: #141f35;
+  border: 1px solid #334765;
+  border-radius: 12px;
+}
+
+.lesson pre {
+  background: #080e1b;
+  padding: 18px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 15px 0;
+  color: #93c5fd;
+  white-space: pre-wrap;
+}
+
+.lesson button {
+  padding: 10px 16px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.lesson p {
+  color: #bdc8da;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 25px;
+  text-align: center;
+  background: #111a30;
+  color: #8998b2;
+}
+
+@media(max-width:600px) {
+  .hero h1 {
+    font-size: 29px;
+  }
+  nav a {
+    margin-left: 8px;
+    font-size: 13px;
+  }
+  .container {
+    padding: 25px 5%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">CODING ACADEMY</div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#materi">Materi</a>
+    <a href="#tentang">Tentang</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h1>Belajar Coding <span>Mulai Dari Nol</span></h1>
+  <p>Temukan materi pemrograman dan mulai perjalanan coding kamu.</p>
+
+  <div class="search-box">
+    <input id="searchInput"
+      type="text"
+      placeholder="Cari HTML, CSS, JavaScript, Python..."
+      oninput="searchLessons()">
+    <button onclick="searchLessons()">Cari</button>
+  </div>
+</section>
+
+<section class="container" id="materi">
+  <h2>Materi Pembelajaran</h2>
+
+  <div class="filters">
+    <button class="active" onclick="filterCategory('Semua',this)">Semua</button>
+    <button onclick="filterCategory('HTML',this)">HTML</button>
+    <button onclick="filterCategory('CSS',this)">CSS</button>
+    <button onclick="filterCategory('JavaScript',this)">JavaScript</button>
+    <button onclick="filterCategory('Python',this)">Python</button>
+  </div>
+
+  <p id="result">Menampilkan semua materi.</p>
+  <div class="grid" id="lessonGrid"></div>
+
+  <div class="lesson" id="lessonDetail">
+    <h2 id="detailTitle"></h2>
+    <p id="detailDescription"></p>
+    <pre><code id="detailCode"></code></pre>
+    <button onclick="copyCode()">Salin Kode</button>
+    <button onclick="closeLesson()">Tutup Materi</button>
+    <p id="detailExplanation"></p>
+  </div>
+</section>
+
+<section class="container" id="tentang">
+  <h2>Tentang Coding Academy</h2>
+  <p style="color:#aab5ca;line-height:1.8">
+    Coding Academy adalah website pembelajaran pemrograman
+    yang membantu pemula mengenal dunia coding.
+    Pelajari berbagai bahasa pemrograman dengan materi
+    sederhana dan contoh kode yang mudah dipahami.
+  </p>
+</section>
+
+<footer>
+  © 2026 Coding Academy. Learn • Practice • Create.
+</footer>
+
+<script>
+const lessons = [
+  {
+    title: "Pengenalan HTML",
+    category: "HTML",
+    description: "Belajar membuat struktur dasar sebuah website.",
+    tags: "html dasar website pemula struktur",
+    code: `<h1>Halo Dunia!</h1>
+<p>Website pertama saya.</p>`,
+    explanation: "HTML digunakan untuk membuat struktur halaman website. Tag h1 membuat judul dan tag p membuat paragraf."
+  },
+  {
+    title: "Pengenalan CSS",
+    category: "CSS",
+    description: "Belajar mengatur warna, ukuran dan desain website.",
+    tags: "css warna desain style tampilan",
+    code: `body {
+  background: black;
+  color: white;
+}
+
+h1 {
+  color: blue;
+}`,
+    explanation: "CSS digunakan untuk mengatur tampilan website, seperti warna latar, ukuran tulisan dan desain."
+  },
+  {
+    title: "JavaScript Dasar",
+    category: "JavaScript",
+    description: "Membuat website menjadi interaktif.",
+    tags: "javascript js fungsi interaktif",
+    code: `let nama = "Coding Academy";
+
+alert("Halo " + nama);`,
+    explanation: "JavaScript membuat website dapat merespons tindakan pengunjung. Alert digunakan untuk menampilkan pesan."
+  },
+  {
+    title: "Python Dasar",
+    category: "Python",
+    description: "Mengenal bahasa pemrograman Python.",
+    tags: "python variabel program pemula",
+    code: `nama = "Developer"
+
+print("Halo", nama)`,
+    explanation: "Python adalah bahasa pemrograman yang memiliki sintaks sederhana. Print digunakan untuk menampilkan teks."
+  },
+  {
+    title: "HTML Form",
+    category: "HTML",
+    description: "Belajar membuat formulir pada website.",
+    tags: "form input tombol html",
+    code: `<form>
+  <input type="text" placeholder="Nama">
+  <button>Kirim</button>
+</form>`,
+    explanation: "Form digunakan untuk mengumpulkan informasi dari pengunjung website."
+  },
+  {
+    title: "CSS Flexbox",
+    category: "CSS",
+    description: "Mengatur posisi elemen menggunakan Flexbox.",
+    tags: "flexbox layout css posisi",
+    code: `.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}`,
+    explanation: "Flexbox membantu mengatur posisi elemen secara fleksibel, baik horizontal maupun vertikal."
+  }
+];
+
+let currentCategory = "Semua";
+
+function displayLessons(data) {
+  const grid = document.getElementById("lessonGrid");
+  grid.innerHTML = "";
+
+  document.getElementById("result").textContent =
+    data.length + " materi ditemukan.";
+
+  data.forEach(lesson => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const tag = document.createElement("div");
+    tag.className = "tag";
+    tag.textContent = lesson.category;
+
+    const title = document.createElement("h3");
+    title.textContent = lesson.title;
+
+    const description = document.createElement("p");
+    description.textContent = lesson.description;
+
+    const button = document.createElement("button");
+    button.textContent = "Pelajari";
+    button.addEventListener("click", () => openLesson(lesson));
+
+    card.append(tag, title, description, button);
+    grid.appendChild(card);
+  });
+}
+
+function searchLessons() {
+  const keyword = document.getElementById("searchInput")
+    .value.toLowerCase().trim();
+
+  const filtered = lessons.filter(lesson => {
+    const matchesCategory =
+      currentCategory === "Semua" ||
+      lesson.category === currentCategory;
+
+    const searchableText =
+      `${lesson.title} ${lesson.category} ${lesson.description} ${lesson.tags} ${lesson.code} ${lesson.explanation}`.toLowerCase();
+
+    return matchesCategory &&
+      searchableText.includes(keyword);
+  });
+
+  displayLessons(filtered);
+}
+
+function filterCategory(category, button) {
+  currentCategory = category;
+
+  document.querySelectorAll(".filters button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+  searchLessons();
+}
+
+function openLesson(lesson) {
+  document.getElementById("lessonDetail").style.display = "block";
+  document.getElementById("detailTitle").textContent = lesson.title;
+  document.getElementById("detailDescription").textContent = lesson.description;
+  document.getElementById("detailCode").textContent = lesson.code;
+  document.getElementById("detailExplanation").textContent = lesson.explanation;
+
+  document.getElementById("lessonDetail")
+    .scrollIntoView({behavior: "smooth"});
+}
+
+function copyCode() {
+  const code = document.getElementById("detailCode").textContent;
+
+  navigator.clipboard.writeText(code)
+    .then(() => alert("Kode berhasil disalin!"))
+    .catch(() => alert("Gagal menyalin. Silakan salin manual."));
+}
+
+function closeLesson() {
+  document.getElementById("lessonDetail").style.display = "none";
+}
+
+displayLessons(lessons);
+</script>
+
+</body>
+</html>
